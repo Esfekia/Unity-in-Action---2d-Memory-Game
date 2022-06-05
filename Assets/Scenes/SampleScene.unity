@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 48743852}
   - component: {fileID: 48743851}
   m_Layer: 0
-  m_Name: wallpaperflare.com_wallpaper
+  m_Name: background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -390,6 +390,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df28f746b67c9bd43a4aeb4374f8f7a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardBack: {fileID: 2086914280}
+  image: {fileID: 21300000, guid: 54ec736ad98228d4f8d40dc84bded3b1, type: 3}
 --- !u!61 &1422221092
 BoxCollider2D:
   m_ObjectHideFlags: 0
