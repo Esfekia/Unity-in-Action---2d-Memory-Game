@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class SceneController : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class SceneController : MonoBehaviour
     public const float offsetY = 5f;
 
     private int score = 0;
+
+    [SerializeField] TMP_Text scoreLabel;
 
     // reference for the card in the scene
     [SerializeField] MemoryCard originalCard;
@@ -103,7 +106,7 @@ public class SceneController : MonoBehaviour
         {
             // increment the score if the revealed cards have matching ids
             score++;
-            Debug.Log($"Score: {score}");
+            scoreLabel.text = $"Score: {score}";
         }
         else
         {
