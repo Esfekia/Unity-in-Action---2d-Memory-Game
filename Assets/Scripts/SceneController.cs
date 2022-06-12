@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
@@ -121,6 +122,11 @@ public class SceneController : MonoBehaviour
         secondRevealed = null;
     }
 
+    public void Restart()
+    {
+        SceneManager.LoadScene("Scene");
+    }
+    
     // Update is called once per frame
     void Update()
     {
