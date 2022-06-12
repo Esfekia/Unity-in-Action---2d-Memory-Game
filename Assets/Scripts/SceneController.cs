@@ -9,13 +9,13 @@ public class SceneController : MonoBehaviour
     public const int gridCols = 4;
     public const float offsetX = 4f;
     public const float offsetY = 5f;
-    
+
     // reference for the card in the scene
     [SerializeField] MemoryCard originalCard;
 
     // an array for references to the sprite assets
     [SerializeField] Sprite[] images;
-        
+
     void Start()
     {
         // position of the first card; all other cards will be offset from here
@@ -23,14 +23,14 @@ public class SceneController : MonoBehaviour
 
         // declare an interger array with a pair of IDs for all four card sprites
         int[] numbers = { 0, 0, 1, 1, 2, 2, 3, 3 };
-        
+
         // call a function that will shuffle the elements of the array
         numbers = ShuffleArray(numbers);
-        
+
         // nested loops to define both columns and rows of the grid
-        for (int i=0; i< gridCols; i++)
-        { 
-            for (int j=0; j< gridRows; j++)
+        for (int i = 0; i < gridCols; i++)
+        {
+            for (int j = 0; j < gridRows; j++)
             {
                 // container reference for either the original card or the copies
                 MemoryCard card;
@@ -42,7 +42,7 @@ public class SceneController : MonoBehaviour
                 }
 
                 int index = j * gridCols + i;
-                
+
                 // retrieve IDs from the shiffled list
                 int id = numbers[index];
 
@@ -53,7 +53,7 @@ public class SceneController : MonoBehaviour
                 float posY = -(offsetY * j) + startPos.y;
                 card.transform.position = new Vector3(posX, posY, startPos.z);
             }
-        }      
+        }
 
     }
 
@@ -69,6 +69,20 @@ public class SceneController : MonoBehaviour
             newArray[r] = tmp;
         }
         return newArray;
+    }
+
+    private MemoryCard firstRevealed;
+    private MemoryCard secondRevealed;
+
+    public bool canReveal
+    {
+        // getter function that returns false if a second card is already revealed
+        get { return secondRevealed == null;}
+    }
+
+    public void CardRevealed(MemoryCard card)
+    {
+        // initially empty
     }
 
     // Update is called once per frame
