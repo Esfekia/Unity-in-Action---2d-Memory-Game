@@ -13,13 +13,19 @@ public class SceneController : MonoBehaviour
     // reference for the card in the scene
     [SerializeField] MemoryCard originalCard;
 
-    // an array for references to the sprite assets;
+    // an array for references to the sprite assets
     [SerializeField] Sprite[] images;
         
     void Start()
     {
-        // position of the first card; all other cards will be offset from here.
+        // position of the first card; all other cards will be offset from here
         Vector3 startPos = originalCard.transform.position;
+
+        // declare an interger array with a pair of IDs for all four card sprites
+        int[] numbers = { 0, 0, 1, 1, 2, 2, 3, 3 };
+        
+        // call a function that will shuffle the elements of the array
+        numbers = ShuffleArray(numbers);
         
         // nested loops to define both columns and rows of the grid
         for (int i=0; i< gridCols; i++)
@@ -34,7 +40,11 @@ public class SceneController : MonoBehaviour
                 {
                     card = Instantiate(originalCard) as MemoryCard;
                 }
-                int id = Random.Range(0, images.Length);
+
+                int index = j * gridCols + i;
+                
+                // retrieve IDs from the shiffled list
+                int id = numbers[index];
 
                 // call the public method we added to MemoryCard
                 card.SetCard(id, images[id]);
@@ -43,9 +53,22 @@ public class SceneController : MonoBehaviour
                 float posY = -(offsetY * j) + startPos.y;
                 card.transform.position = new Vector3(posX, posY, startPos.z);
             }
-        }
-        
+        }      
 
+    }
+
+    // An implementation of the Knuth shuffle algorith
+    private int[] ShuffleArray(int[] numbers)
+    {
+        int[] newArray = numbers.Clone() as int[];
+        for (int i = 0; i < newArray.Length; i++)
+        {
+            int tmp = newArray[i];
+            int r = Random.Range(i, newArray.Length);
+            newArray[i] = newArray[r];
+            newArray[r] = tmp;
+        }
+        return newArray;
     }
 
     // Update is called once per frame
