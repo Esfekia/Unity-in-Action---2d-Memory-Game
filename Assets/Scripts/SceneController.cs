@@ -10,6 +10,8 @@ public class SceneController : MonoBehaviour
     public const float offsetX = 4f;
     public const float offsetY = 5f;
 
+    private int score = 0;
+
     // reference for the card in the scene
     [SerializeField] MemoryCard originalCard;
 
@@ -82,7 +84,38 @@ public class SceneController : MonoBehaviour
 
     public void CardRevealed(MemoryCard card)
     {
-        // initially empty
+        if (firstRevealed == null)
+        {
+            firstRevealed = card;
+        }
+        else
+        {
+            secondRevealed = card;
+
+            //call the coroutine when both cards are revealed
+            StartCoroutine(CheckMatch());
+        }
+    }
+
+    private IEnumerator CheckMatch()
+    {
+        if (firstRevealed.Id == secondRevealed.Id)
+        {
+            // increment the score if the revealed cards have matching ids
+            score++;
+            Debug.Log($"Score: {score}");
+        }
+        else
+        {
+            yield return new WaitForSeconds(.5f);
+
+            // unreveal the cards if they do not match
+            firstRevealed.Unreveal();
+            secondRevealed.Unreveal();
+        }
+        // clear out the variables whether or not a match was made.
+        firstRevealed = null;
+        secondRevealed = null;
     }
 
     // Update is called once per frame
